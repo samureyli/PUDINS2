@@ -1,0 +1,66 @@
+#include <AFmotor.h /* inclui a biblioteca
+AFmotor.h */
+
+/* Variáveis que armazenam a leitura dos sensores de 
+obstáculo IR. */
+int Sensor_Direita = 0;
+int Sensor_Esquerda = 0;
+
+/* Define os pinos 9 a 10 para ossensores IR */
+#define Pin_Sensor_Direita 9
+#define Pin_Sensor_Esquerda 10
+
+AF_DCMotor Motor_Esquerda (2) ; /* Define Motor Esquerda Como poscao 2 controle para o motor*/
+AF_DCMotor Motor_Direita (3) ; /* Define Motor Esquerda Como posicao 2 de controle para o motor  */
+
+void setup´() {
+  Motor_Esquerda.run(RELEASE) ; /* inicia com os motores parados */
+  Motor_Direita.run (RELEASE) ; 
+}
+/* Define os pinos 9 e 10 para os sensores IR */ 
+#define Pin_Sensor_Direita 9
+#define Pin_Sensor_Esquerda 10 
+
+AF_DCMotor Motor_Esquerda(2) ;
+/*Define motor esquerda como posicao 2 de controle para o motor */ 
+AF_DCMotor Motor_Direita (3) ;
+/* Define motor direita como posicao 3 de controle para o motor */
+
+void setup(){
+  Motor_Esquerda.run(RELEASE) ; /*inicia com os motores paradoe */ 
+  Motor_Diretia.run (RELEASE) ; 
+
+}
+void loop (){
+  /* Sensores realisam a leitura */ 
+  Sensores_Direita = digitalRead(Pin_Sensor_Direita) ;
+  Sensor_Esquerda = digitalRead(Pin_Sensor_Esquerda) ;
+
+  /* Nenhum sensor detectou a linha */
+  if((Sensor_Esquerda == 1) && (Sensor_Direita == 1)) {
+    Motor_Esquerda.setSpeed(255) ;
+    /* define as velocidades dos motores */ 
+    Motor_Direita.setSpeed (255) ;
+
+    Motor_Esquerda.run(FORWARD) ; /* Robo move  para frente */ 
+    Motor_Direita.run(FORWARD) ;
+  } 
+  /*sensor da direita detectou a linha */ 
+  if ((sensor_Esquerda == 1) && (Sensor_Direita == 0)) {
+    /* define velocidade dos motores */
+    motor_Direita.setSpeed(150);
+    Motor_Esquerda.run (FORWARD);
+    /* robo vira a direita */
+    Motor_Diretia.run(BACKWARD);
+  }   
+  /*Sensor da esquerda detectou a linha */ 
+  if((Sensor_Esquerda == 0) && (Sensor_Direita == 1)) {
+    Motor_Esquerda.setSpeed(150);
+    /*define as velocidades dos motores */ 
+    Motor_Direita.setSpeed(150) ;
+
+    Motor_Esquerda.run(FORWARD);
+    /*robo vira direita*/
+    Motor_Direita.run(BACKWARD);
+  } 
+}
